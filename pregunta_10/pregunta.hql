@@ -30,3 +30,9 @@ LOAD DATA LOCAL INPATH 'data.tsv' INTO TABLE t0;
     >>> Escriba su respuesta a partir de este punto <<<
 */
 
+INSERT OVERWRITE LOCAL DIRECTORY './output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+
+SELECT key, COUNT(*) FROM (
+    SELECT EXPLODE(c3) AS (key, val) FROM t0
+) AS temp GROUP BY key
