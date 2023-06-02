@@ -44,3 +44,8 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 /*
     >>> Escriba su respuesta a partir de este punto <<<
 */
+INSERT OVERWRITE LOCAL DIRECTORY './output'
+
+SELECT DISTINCT(temp.flat) FROM(
+    SELECT EXPLODE(c5) AS flat FROM tbl0
+) AS temp
